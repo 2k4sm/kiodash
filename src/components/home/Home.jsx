@@ -1,6 +1,6 @@
 import Sidebar from "../sidebar/Sidebar"
 import Topbar from "../topbar/Topbar"
-
+import MachineContainer from "../machine/MachineContainer"
 function Home() {
     return (
         <div className="flex gap-2 justify-center">
@@ -9,6 +9,7 @@ function Home() {
             </div>
             <div className="w-full sm:w-[80vw]">
                 <Topbar></Topbar>
+                <MachineContainer></MachineContainer>
             </div>
         </div>
     )
