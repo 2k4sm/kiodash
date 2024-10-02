@@ -1,10 +1,18 @@
-function Topbar() {
+function Topbar({ toggleSidebar }) {
     return (
         <div className="flex flex-col gap-2 md:flex-row justify-between items-center bg-base-300 w-full rounded-md p-5 h-fit">
             <div className="w-fit">
                 <div className="font-sans font-extrabold text-4xl text-green-400">KioDash</div>
             </div>
-            <div className="sm:w-[60%] w-full">
+            <div className="sm:w-[60%] w-full sm:block flex justify-evenly items-center">
+                <button
+                    className="block sm:hidden text-green-500 hover:text-green-700"
+                    onClick={toggleSidebar}
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
                 <label className="input input-bordered flex items-center gap-2">
                     <input type="text" className="grow" placeholder="Search" />
                     <svg
@@ -20,8 +28,7 @@ function Topbar() {
                 </label>
             </div>
         </div>
-    )
+    );
 }
 
-
-export default Topbar
+export default Topbar;
