@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Modal from './Modal';
 import { useMachineStore, useDispenserStore, useRecipeStore } from '../../store/store';
 const CustomModal = ({ modalType, inputData, handleChange, handleSubmit, closeModal }) => {
+    const machineState = useMachineStore((state) => state.machines)
+
     switch (modalType) {
         case 'Machine':
             return (
@@ -29,10 +31,9 @@ const CustomModal = ({ modalType, inputData, handleChange, handleSubmit, closeMo
                     fields={[
                         {
                             label: 'Machine ID',
-                            type: 'number',
+                            type: 'select',
                             id: 'machine-id',
-                            max: 1000,
-                            placeholder: 'Enter machine ID',
+                            options: machineState.map((_, index) => index),
                             value: inputData['machineId'] || '',
                             onChange: (e) => handleChange(e, 'machineId'),
                         },
@@ -159,7 +160,7 @@ function CreateModel({ modalType, isOpen, closeModal }) {
         <div>
             {isOpen && (
                 <dialog open className="modal modal-bottom sm:modal-middle bg-slate-200">
-                    <div className="modal-box z-20">
+                    <div className="modal-box">
                         <CustomModal
                             modalType={modalType}
                             inputData={inputData}

@@ -1,7 +1,18 @@
 import CreateModel from "../common/CreateModal";
+import DeleteModal from "../common/DeleteModal";
 import { useState } from "react";
 function Sidebar({ isOpen, toggleSidebar }) {
-    const [isCreateModalOpen, setIsOpen] = useState(false);
+    const [machineCreateModal, setMachineCreateModal] = useState(false);
+    const [machineDeleteModal, setMachineDeleteModal] = useState(false);
+
+
+    const [dispenserCreateModal, setDispenserCreateModal] = useState(false);
+    const [dispenserDeleteModal, setDispenserDeleteModal] = useState(false);
+
+
+    const [recipeCreateModal, setRecipeCreateModal] = useState(false);
+    const [recipeDeleteModal, setRecipeDeleteModal] = useState(false);
+
 
     return (
         <div
@@ -23,30 +34,58 @@ function Sidebar({ isOpen, toggleSidebar }) {
                             <summary>Machines</summary>
                             <ul>
                                 <li>
-                                    <button onClick={() => setIsOpen(true)}>
+                                    <button onClick={() => setMachineCreateModal(true)}>
                                         Add
                                     </button>
 
-                                    {isCreateModalOpen && (
+                                    {machineCreateModal && (
                                         <CreateModel
-                                            className="fixed inset-0 bg-slate-500 sm:hidden"
                                             modalType="Machine"
-                                            isOpen={isCreateModalOpen}
-                                            closeModal={() => setIsOpen(false)}
+                                            isOpen={machineCreateModal}
+                                            closeModal={() => setMachineCreateModal(false)}
                                         />
                                     )}
                                 </li>
-                                <li><a>Delete</a></li>
+                                <li>
+                                    <a onClick={() => setMachineDeleteModal(true)}>Delete</a>
+                                    {machineDeleteModal && (
+                                        <DeleteModal
+                                            isOpen={machineDeleteModal}
+                                            modalType='Machine'
+                                            modalClose={() => setMachineDeleteModal(false)}
+                                        />
+                                    )}
+                                </li>
                             </ul>
                         </details>
                     </li>
                     <li>
                         <details open>
-                            <summary>Dispenser-Ingredients</summary>
+                            <summary>Dispensers</summary>
                             <ul>
-                                <li><a>Add</a></li>
-                                <li><a>Edit</a></li>
-                                <li><a>Delete</a></li>
+                                <li>
+                                    <button onClick={() => setDispenserCreateModal(true)}>
+                                        Add
+                                    </button>
+
+                                    {dispenserCreateModal && (
+                                        <CreateModel
+                                            modalType="Dispenser"
+                                            isOpen={dispenserCreateModal}
+                                            closeModal={() => setDispenserCreateModal(false)}
+                                        />
+                                    )}
+                                </li>
+                                <li>
+                                    <a onClick={() => setDispenserDeleteModal(true)}>Delete</a>
+                                    {dispenserDeleteModal && (
+                                        <DeleteModal
+                                            isOpen={dispenserDeleteModal}
+                                            modalType='Dispenser'
+                                            modalClose={() => setDispenserDeleteModal(false)}
+                                        />
+                                    )}
+                                </li>
                             </ul>
                         </details>
                     </li>
@@ -54,9 +93,29 @@ function Sidebar({ isOpen, toggleSidebar }) {
                         <details open>
                             <summary>Recipes</summary>
                             <ul>
-                                <li><a>Add</a></li>
-                                <li><a>Edit</a></li>
-                                <li><a>Delete</a></li>
+                                <li>
+                                    <button onClick={() => setRecipeCreateModal(true)}>
+                                        Add
+                                    </button>
+
+                                    {recipeCreateModal && (
+                                        <CreateModel
+                                            modalType="Recipe"
+                                            isOpen={recipeCreateModal}
+                                            closeModal={() => setRecipeCreateModal(false)}
+                                        />
+                                    )}
+                                </li>
+                                <li>
+                                    <a onClick={() => setRecipeDeleteModal(true)}>Delete</a>
+                                    {recipeDeleteModal && (
+                                        <DeleteModal
+                                            isOpen={recipeDeleteModal}
+                                            modalType='Recipe'
+                                            modalClose={() => setRecipeDeleteModal(false)}
+                                        />
+                                    )}
+                                </li>
                             </ul>
                         </details>
                     </li>
