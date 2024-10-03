@@ -1,17 +1,18 @@
-function Modal({ title, fields, onSubmit, onCancel }) {
+import React from 'react';
+
+const Modal = React.memo(({ title, fields, onSubmit, onCancel }) => {
     return (
         <div>
             <h2 className="font-bold text-lg">{title}</h2>
             <form onSubmit={onSubmit}>
                 {fields.map((field, index) => (
-                    <div className="form-control mt-4" key={index}>
+                    <div className="form-control mt-4" key={field.id || index}>
                         <label className="label" htmlFor={field.id}>
                             <span className="label-text">{field.label}</span>
                         </label>
                         {field.type === 'text' && (
                             <input
                                 id={field.id}
-                                name={field.name}
                                 type="text"
                                 placeholder={field.placeholder}
                                 className="input input-bordered"
@@ -22,7 +23,6 @@ function Modal({ title, fields, onSubmit, onCancel }) {
                         {field.type === 'select' && (
                             <select
                                 id={field.id}
-                                name={field.name}
                                 className="select select-bordered"
                                 value={field.value}
                                 onChange={field.onChange}
@@ -37,7 +37,6 @@ function Modal({ title, fields, onSubmit, onCancel }) {
                         {field.type === 'textarea' && (
                             <textarea
                                 id={field.id}
-                                name={field.name}
                                 placeholder={field.placeholder}
                                 className="textarea textarea-bordered"
                                 value={field.value}
@@ -52,12 +51,12 @@ function Modal({ title, fields, onSubmit, onCancel }) {
                         Submit
                     </button>
                     <button type="button" className="btn" onClick={onCancel}>
-                        Cancel
+                        Close
                     </button>
                 </div>
             </form>
         </div>
     );
-}
+});
 
 export default Modal;
