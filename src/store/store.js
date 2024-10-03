@@ -4,7 +4,7 @@ import { shallow } from "zustand/shallow";
 
 export const useMachineStore = create(persist(
     (set) => ({
-        machines: [{ machineName: "name1" }, { machineName: "name2" }, { machineName: "name3" }],
+        machines: [],
         addMachine: (newMachine) => set((state) => ({
             machines: [...state.machines, newMachine]
         })),

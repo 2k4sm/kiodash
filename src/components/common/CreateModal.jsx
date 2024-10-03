@@ -41,7 +41,6 @@ const CustomModal = ({ modalType, inputData, handleChange, handleSubmit, closeMo
                             label: 'Dispenser ID',
                             type: 'number',
                             id: 'dispenser-id',
-                            max: 1000,
                             placeholder: 'Enter dispenser ID',
                             value: inputData['dispenserId'] || '',
                             onChange: (e) => handleChange(e, 'dispenserId'),

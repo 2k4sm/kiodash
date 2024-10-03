@@ -29,6 +29,7 @@ const Modal = React.memo(({ title, fields, onSubmit, onCancel }) => {
                                 value={field.value}
                                 onChange={field.onChange}
                             >
+                                <option value="-1" hidden>Select Valid Id</option>
                                 {field.options.map((option, idx) => (
                                     <option key={idx} value={option}>
                                         {option}
