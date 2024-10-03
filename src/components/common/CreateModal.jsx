@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Modal from './Modal';
-
+import { useMachineStore, useDispenserStore, useRecipeStore } from '../../store/store';
 const CustomModal = ({ modalType, inputData, handleChange, handleSubmit, closeModal }) => {
     switch (modalType) {
         case 'Machine':
@@ -29,16 +29,18 @@ const CustomModal = ({ modalType, inputData, handleChange, handleSubmit, closeMo
                     fields={[
                         {
                             label: 'Machine ID',
-                            type: 'text',
+                            type: 'number',
                             id: 'machine-id',
+                            max: 1000,
                             placeholder: 'Enter machine ID',
                             value: inputData['machineId'] || '',
                             onChange: (e) => handleChange(e, 'machineId'),
                         },
                         {
                             label: 'Dispenser ID',
-                            type: 'text',
+                            type: 'number',
                             id: 'dispenser-id',
+                            max: 1000,
                             placeholder: 'Enter dispenser ID',
                             value: inputData['dispenserId'] || '',
                             onChange: (e) => handleChange(e, 'dispenserId'),
@@ -61,8 +63,9 @@ const CustomModal = ({ modalType, inputData, handleChange, handleSubmit, closeMo
                         },
                         {
                             label: 'Quantity',
-                            type: 'text',
+                            type: 'number',
                             id: 'quantity',
+                            max: 1000,
                             placeholder: 'Enter quantity (e.g., 500g)',
                             value: inputData['quantity'] || '',
                             onChange: (e) => handleChange(e, 'quantity'),
@@ -113,11 +116,17 @@ const CustomModal = ({ modalType, inputData, handleChange, handleSubmit, closeMo
     }
 };
 
-function CreateModel({ modalType }) {
-    const [isOpen, setIsOpen] = useState(false);
-    const [machineState, setMachineState] = useState([]);
-    const [recipeState, setRecipeState] = useState([]);
-    const [dispenserState, setdispenserState] = useState([]);
+function CreateModel({ modalType, isOpen, closeModal }) {
+    const machineState = useMachineStore((state) => state.machines)
+    const addMachine = useMachineStore((state) => state.addMachine)
+
+    const recipeState = useRecipeStore((state) => state.recipes)
+    const addRecipe = useRecipeStore((state) => state.addRecipe)
+
+
+    const dispenserState = useDispenserStore((state) => state.dispensers)
+    const addDispenser = useDispenserStore((state) => state.addDispenser)
+
     const [inputData, setInputData] = useState({});
 
     const handleChange = (e, field) => {
@@ -131,28 +140,13 @@ function CreateModel({ modalType }) {
         e.preventDefault();
         switch (formtype) {
             case 'recipes':
-                setRecipeState(
-                    [
-                        ...recipeState,
-                        inputData,
-                    ]
-                );
+                addRecipe(inputData)
                 break;
             case 'machines':
-                setMachineState(
-                    [
-                        ...machineState,
-                        inputData,
-                    ]
-                );
+                addMachine(inputData)
                 break;
             case 'dispensers':
-                setdispenserState(
-                    [
-                        ...dispenserState,
-                        inputData,
-                    ]
-                );
+                addDispenser(inputData)
                 break;
         }
 
@@ -161,16 +155,11 @@ function CreateModel({ modalType }) {
         console.log(dispenserState)
     };
 
-    const closeModal = () => {
-        setIsOpen(false);
-    };
-
     return (
         <div>
-            <button className="btn" onClick={() => setIsOpen(true)}>Open Modal</button>
             {isOpen && (
-                <dialog open className="modal modal-bottom sm:modal-middle">
-                    <div className="modal-box">
+                <dialog open className="modal modal-bottom sm:modal-middle bg-slate-200">
+                    <div className="modal-box z-20">
                         <CustomModal
                             modalType={modalType}
                             inputData={inputData}
@@ -178,6 +167,7 @@ function CreateModel({ modalType }) {
                             handleSubmit={handleSubmit}
                             closeModal={closeModal}
                         />
+
                     </div>
                 </dialog>
             )}

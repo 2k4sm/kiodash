@@ -1,4 +1,8 @@
+import CreateModel from "../common/CreateModal";
+import { useState } from "react";
 function Sidebar({ isOpen, toggleSidebar }) {
+    const [isCreateModalOpen, setIsOpen] = useState(false);
+
     return (
         <div
             className={`sm:menu bg-base-300 w-full rounded-md gap-5 h-full fixed sm:static z-50 sm:z-auto sm:flex ${isOpen ? 'block' : 'hidden'}`}
@@ -18,8 +22,20 @@ function Sidebar({ isOpen, toggleSidebar }) {
                         <details open>
                             <summary>Machines</summary>
                             <ul>
-                                <li><a>Add</a></li>
-                                <li><a>Edit</a></li>
+                                <li>
+                                    <button onClick={() => setIsOpen(true)}>
+                                        Add
+                                    </button>
+
+                                    {isCreateModalOpen && (
+                                        <CreateModel
+                                            className="fixed inset-0 bg-slate-500 sm:hidden"
+                                            modalType="Machine"
+                                            isOpen={isCreateModalOpen}
+                                            closeModal={() => setIsOpen(false)}
+                                        />
+                                    )}
+                                </li>
                                 <li><a>Delete</a></li>
                             </ul>
                         </details>

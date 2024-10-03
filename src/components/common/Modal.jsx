@@ -13,6 +13,7 @@ const Modal = React.memo(({ title, fields, onSubmit, onCancel }) => {
                         {field.type === 'text' && (
                             <input
                                 id={field.id}
+                                required
                                 type="text"
                                 placeholder={field.placeholder}
                                 className="input input-bordered"
@@ -23,6 +24,7 @@ const Modal = React.memo(({ title, fields, onSubmit, onCancel }) => {
                         {field.type === 'select' && (
                             <select
                                 id={field.id}
+                                required
                                 className="select select-bordered"
                                 value={field.value}
                                 onChange={field.onChange}
@@ -37,8 +39,23 @@ const Modal = React.memo(({ title, fields, onSubmit, onCancel }) => {
                         {field.type === 'textarea' && (
                             <textarea
                                 id={field.id}
+                                required
                                 placeholder={field.placeholder}
                                 className="textarea textarea-bordered"
+                                value={field.value}
+                                onChange={field.onChange}
+                            />
+                        )}
+                        {field.type === 'number' && (
+                            <input
+                                id={field.id}
+                                required
+                                type="number"
+                                placeholder={field.placeholder}
+                                className="input input-bordered"
+                                max={field.max}
+                                maxLength={field.maxLength}
+                                min={0}
                                 value={field.value}
                                 onChange={field.onChange}
                             />
