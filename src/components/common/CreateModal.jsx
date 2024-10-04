@@ -89,14 +89,7 @@ const CustomModal = ({ modalType, inputData, handleChange, handleSubmit, closeMo
                             value: inputData['recipeName'] || '',
                             onChange: (e) => handleChange(e, 'recipeName'),
                         },
-                        {
-                            label: 'Machine IDs',
-                            type: 'text',
-                            id: 'machine-ids',
-                            placeholder: 'Enter machine IDs (comma-separated)',
-                            value: inputData['machineIds'] || '',
-                            onChange: (e) => handleChange(e, 'machineIds'),
-                        },
+
                         {
                             label: 'Recipe Details',
                             type: 'textarea',
@@ -116,15 +109,12 @@ const CustomModal = ({ modalType, inputData, handleChange, handleSubmit, closeMo
     }
 };
 
-function CreateModel({ modalType, isOpen, closeModal }) {
-    const machineState = useMachineStore((state) => state.machines)
+function CreateModal({ machine, modalType, isOpen, closeModal }) {
     const addMachine = useMachineStore((state) => state.addMachine)
 
-    const recipeState = useRecipeStore((state) => state.recipes)
     const addRecipe = useRecipeStore((state) => state.addRecipe)
 
 
-    const dispenserState = useDispenserStore((state) => state.dispensers)
     const addDispenser = useDispenserStore((state) => state.addDispenser)
 
     const [inputData, setInputData] = useState({});
@@ -140,7 +130,7 @@ function CreateModel({ modalType, isOpen, closeModal }) {
         e.preventDefault();
         switch (formtype) {
             case 'recipes':
-                addRecipe(inputData)
+                addRecipe(machine.machineId, inputData)
                 break;
             case 'machines':
                 addMachine(inputData)
@@ -149,10 +139,6 @@ function CreateModel({ modalType, isOpen, closeModal }) {
                 addDispenser(inputData)
                 break;
         }
-
-        console.log(machineState)
-        console.log(recipeState)
-        console.log(dispenserState)
     };
 
     return (
@@ -175,4 +161,4 @@ function CreateModel({ modalType, isOpen, closeModal }) {
     );
 }
 
-export default CreateModel;
+export default CreateModal;

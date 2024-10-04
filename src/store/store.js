@@ -16,17 +16,41 @@ export const useMachineStore = create(persist(
 );
 
 export const useRecipeStore = create(persist(
-    (set) => ({
-        recipes: [],
-        addRecipe: (newRecipe) => set((state) => ({
-            recipes: [...state.recipes, newRecipe]
-        })),
-        deleteRecipe: (index) => set((state) => ({
-            recipes: state.recipes.filter((_, i) => i !== index),
-            shallow
-        }))
-    }), { name: "recipes" })
-);
+    (set, get) => ({
+        recipes: {},
+
+        addRecipe: (machineId, newRecipe) => set((state) => {
+            const updatedRecipes = { ...state.recipes };
+            if (!updatedRecipes[machineId]) {
+                updatedRecipes[machineId] = { recipes: [newRecipe] };
+            } else {
+                updatedRecipes[machineId].recipes.push(newRecipe);
+            }
+            return { recipes: updatedRecipes };
+        }),
+
+        deleteRecipe: (machineId, index) => set((state) => {
+            const updatedRecipes = { ...state.recipes };
+            const machineRecipes = updatedRecipes[machineId]?.recipes;
+
+            if (machineRecipes && machineRecipes[index]) {
+                machineRecipes.splice(index, 1);
+                if (machineRecipes.length === 0) {
+                    delete updatedRecipes[machineId];
+                }
+            }
+
+            return { recipes: updatedRecipes };
+        }),
+
+        getRecipesByMachineId: (machineId) => {
+            const state = get();
+            return state.recipes[machineId]?.recipes || [];
+        }
+    }),
+    { name: "recipes" }
+));
+
 
 export const useDispenserStore = create(persist(
     (set) => ({

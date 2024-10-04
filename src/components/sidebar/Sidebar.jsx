@@ -9,11 +9,6 @@ function Sidebar({ isOpen, toggleSidebar }) {
     const [dispenserCreateModal, setDispenserCreateModal] = useState(false);
     const [dispenserDeleteModal, setDispenserDeleteModal] = useState(false);
 
-
-    const [recipeCreateModal, setRecipeCreateModal] = useState(false);
-    const [recipeDeleteModal, setRecipeDeleteModal] = useState(false);
-
-
     return (
         <div
             className={`sm:menu bg-base-300 w-full rounded-md gap-5 h-full fixed sm:static z-50 sm:z-auto sm:flex ${isOpen ? 'block' : 'hidden'}`}
@@ -84,36 +79,6 @@ function Sidebar({ isOpen, toggleSidebar }) {
                                             isOpen={dispenserDeleteModal}
                                             modalType='Dispenser'
                                             modalClose={() => setDispenserDeleteModal(false)}
-                                        />
-                                    )}
-                                </li>
-                            </ul>
-                        </details>
-                    </li>
-                    <li>
-                        <details open>
-                            <summary>Recipes</summary>
-                            <ul>
-                                <li>
-                                    <button onClick={() => setRecipeCreateModal(true)}>
-                                        Add
-                                    </button>
-
-                                    {recipeCreateModal && (
-                                        <CreateModel
-                                            modalType="Recipe"
-                                            isOpen={recipeCreateModal}
-                                            closeModal={() => setRecipeCreateModal(false)}
-                                        />
-                                    )}
-                                </li>
-                                <li>
-                                    <a onClick={() => setRecipeDeleteModal(true)}>Delete</a>
-                                    {recipeDeleteModal && (
-                                        <DeleteModal
-                                            isOpen={recipeDeleteModal}
-                                            modalType='Recipe'
-                                            modalClose={() => setRecipeDeleteModal(false)}
                                         />
                                     )}
                                 </li>

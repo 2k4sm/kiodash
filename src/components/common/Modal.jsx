@@ -1,6 +1,4 @@
-import React from 'react';
-
-const Modal = React.memo(({ title, fields, onSubmit, onCancel }) => {
+const Modal = (({ title, fields, onSubmit, onCancel }) => {
     return (
         <div>
             <h2 className="font-bold text-lg">{title}</h2>

@@ -1,8 +1,4 @@
-import { useState } from "react";
-import Recipe from "../recipe/Recipe";
-
 function Topbar({ toggleSidebar }) {
-    const [isRecipeOpen, setRecipe] = useState(false)
     return (
         <div className="flex flex-col gap-2 md:flex-row justify-between items-center bg-base-300 w-full rounded-md p-5 h-fit">
             <div className="w-fit sm:w-[40%]">
@@ -31,15 +27,6 @@ function Topbar({ toggleSidebar }) {
                                 clipRule="evenodd" />
                         </svg>
                     </label>
-                </div>
-                <div>
-                    <button className="btn btn-primary" onClick={() => setRecipe(true)}>Recipes</button>
-                    {isRecipeOpen && (
-                        <Recipe
-                            isOpen={isRecipeOpen}
-                            closeModal={() => setRecipe(false)}
-                        />
-                    )}
                 </div>
             </div>
         </div>
