@@ -1,10 +1,11 @@
-import { useDispenserStore } from "../../store/store";
+import { useDispenserStore, useRecipeStore } from "../../store/store";
 import { useMemo, useState } from "react";
 import ViewMachine from "./ViewMachine";
 
 function Machine({ machine, machineId }) {
     const machineName = machine.machineName;
     const dispensers = useDispenserStore((state) => state.dispensers);
+
     const filteredDisps = useMemo(
         () => dispensers.filter((dispenser) => dispenser.machineId == machineId),
         [dispensers, machineId]
