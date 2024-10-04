@@ -1,12 +1,16 @@
 import { useDispenserStore } from "../../store/store";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
+import ViewMachine from "./ViewMachine";
 
-function Machine({ machineName, machineId }) {
+function Machine({ machine, machineId }) {
+    const machineName = machine.machineName;
     const dispensers = useDispenserStore((state) => state.dispensers);
     const filteredDisps = useMemo(
         () => dispensers.filter((dispenser) => dispenser.machineId == machineId),
         [dispensers, machineId]
     );
+
+    const [isMachineOpen, setMachine] = useState(false)
 
     return (
         <div className="card card-compact bg-base-100 w-full md:w-[30vw] lg:w-[24vw] shadow-xl min-w-[5vw]">
@@ -18,7 +22,7 @@ function Machine({ machineName, machineId }) {
                     <line x1="10" y1="16" x2="10.01" y2="16"></line>
                 </svg>
 
-                <div className="gap-1 flex-col h-60">
+                <div className="gap-1 flex-col h-60 bg-slate-800 rounded-md p-2">
                     <span className="font-extrabold text-slate-400">Ingredients</span>
                     <div className="overflow-y-auto overscroll-y-auto max-h-52">
                         {filteredDisps.map((disp, index) => (
@@ -34,10 +38,18 @@ function Machine({ machineName, machineId }) {
             <div className="card-body flex flex-row justify-between items-center w-full">
                 <div className="card-title font-sans">{machineName}</div>
                 <div className="card-actions">
-                    <button className="btn btn-sm btn-secondary rounded-md ">View</button>
+                    <button className="btn btn-sm btn-primary rounded-md" onClick={() => setMachine(true)}>View</button>
+                    {isMachineOpen && (
+                        <ViewMachine
+                            isOpen={isMachineOpen}
+                            machine={machine}
+                            dispensers={filteredDisps}
+                            closeModal={() => { setMachine(false) }}
+                        />
+                    )}
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 

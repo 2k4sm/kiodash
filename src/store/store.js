@@ -37,6 +37,30 @@ export const useDispenserStore = create(persist(
         deleteDispenser: (index) => set((state) => ({
             dispensers: state.dispensers.filter((_, i) => i !== index),
             shallow
-        }))
+        })),
+        incrementDispenser: (index) => set((state) => {
+            const dispensers = [...state.dispensers];
+
+            if (dispensers[index]) {
+                dispensers[index] = {
+                    ...dispensers[index],
+                    quantity: (dispensers[index].quantity - 0) < 1000 ? (dispensers[index].quantity - 0) + 1 : (dispensers[index].quantity - 0)
+                };
+            }
+
+            return { dispensers };
+        }),
+        decrementDispenser: (index) => set((state) => {
+            const dispensers = [...state.dispensers];
+
+            if (dispensers[index]) {
+                dispensers[index] = {
+                    ...dispensers[index],
+                    quantity: (dispensers[index].quantity - 0) > 0 ? (dispensers[index].quantity - 0) - 1 : (dispensers[index].quantity - 0)
+                };
+            }
+
+            return { dispensers };
+        })
     }), { name: "dispensers" })
 );
