@@ -6,7 +6,7 @@ function Topbar({ toggleSidebar }) {
             </div>
             <div className="sm:w-[60%] w-full sm:block flex justify-evenly items-center">
                 <button
-                    className="block sm:hidden text-green-500 hover:text-green-700"
+                    className="block sm:hidden text-green-500 hover:text-green-700 rounded-md p-3 bg-slate-800"
                     onClick={toggleSidebar}
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
