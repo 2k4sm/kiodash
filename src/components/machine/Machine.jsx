@@ -66,14 +66,23 @@ function Machine({ machine, machineId }) {
 
                 <div className="gap-1 flex-col h-60">
                     <span className="font-extrabold text-slate-400">Dispensers</span>
-                    <div className="overflow-y-auto overscroll-y-auto max-h-52">
-                        {filteredDisps.map((disp, index) => (
-                            <div key={index} className="bg-sky-900 m-2 p-1 rounded-md">
-                                <p className="font-mono font-bold break-words w-[99%]">{disp.ingredientName}</p>
-                                <progress className={`progress ${disp.quantity > 350 ? 'progress-success' : 'progress-error'} w-full`} value={disp.quantity} max="1000"></progress>
+                    <div className="overflow-y-auto overscroll-y-auto max-h-56">
+                        {filteredDisps.length > 0 ? (
+                            filteredDisps.map((disp, index) => (
+                                <div key={index} className="bg-sky-900 m-2 p-1 rounded-md">
+                                    <p className="font-mono font-bold break-words w-[99%]">{disp.ingredientName}</p>
+                                    <progress className={`progress ${disp.quantity > 350 ? 'progress-success' : 'progress-error'} w-full`} value={disp.quantity} max="1000"></progress>
+                                </div>
+                            ))
+                        ) : (
+                            <div className="flex flex-col items-center justify-center w-full h-52 p-5 mt-2 text-center text-gray-500 bg-gray-700 rounded-md shadow-md">
+                                <p className="text-lg font-semibold mb-2">No dispensers present.</p>
+                                <p className="block sm:hidden">Create a new one from the Menubar.</p>
+                                <p className="hidden sm:block">Create a new one from the Sidebar.</p>
                             </div>
-                        ))}
+                        )}
                     </div>
+
                 </div>
             </div>
 

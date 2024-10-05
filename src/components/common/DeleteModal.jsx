@@ -54,6 +54,7 @@ function DeleteModel({ isOpen, modalType, modalClose, machineId, index, machine 
             {isOpen && (
                 <dialog open className="modal modal-bottom sm:modal-middle bg-slate-200">
                     <div className="modal-box flex flex-col items-center">
+                        <p className="text-lg font-semibold mb-2">Click to delete.</p>
                         <div className="w-[99%] break-words">
                             <CustomModal modalType={modalType} machineId={machineId} recInd={index} modalClose={modalClose}> </CustomModal>
                         </div>
