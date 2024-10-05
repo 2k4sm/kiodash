@@ -28,30 +28,64 @@ git clone git@github.com:2k4sm/kiodash.git
 4. Open your browser and navigate to `http://localhost:5173/` to access kiodash.
 
 ## Kiosks Admin Dashboard Overview
-### Task Overview
 
-Create a beautiful, interactive, and simple admin dashboard for managing Epicure Kiosks. Focus on the frontend, ensuring the design is ready for future API integration.
+### Directory Structure
+- Overview of the project structure
 
-### Primary Features
-#### 1. Machine Monitoring
-- **Display a list of machines** with the ability to view details of each machine.
-- **Details for each machine**:
-    - Sensor status (e.g., temperature, operational status)
-    - Dispensers and their respective quantities
-    - Ingredients and their respective quantities
-#### 2. Dispenser Management
-- **View and edit** the ingredients and quantities in each machine's dispenser.
-- **CRUD operations** for ingredients assigned to dispensers:
-    - Create
-    - Read
-    - Update
-    - Delete
-#### 3. Recipe Management
-- **Display a list of recipes** for each machine.
-- **CRUD operations** for recipes:
-    - Create
-    - Read
-    - Update
-    - Delete
-- **Recipe composition**:
-    - A list of ingredients with quantities
+```bash
+
+    src
+    |-- App.css
+    |-- App.jsx
+    |-- assets
+    |   `-- react.svg
+    |-- components
+    |   |-- common
+    |   |   |-- CreateModal.jsx
+    |   |   |-- DeleteModal.jsx
+    |   |   |-- Modal.jsx
+    |   |   `-- UpdateModel.jsx
+    |   |-- home
+    |   |   `-- Home.jsx
+    |   |-- machine
+    |   |   |-- Machine.jsx
+    |   |   |-- MachineContainer.jsx
+    |   |   `-- ViewMachine.jsx
+    |   |-- sidebar
+    |   |   `-- Sidebar.jsx
+    |   `-- topbar
+    |       `-- Topbar.jsx
+    |-- index.css
+    |-- main.jsx
+    `-- store
+        `-- store.js
+
+```
+
+### Features
+- Machine Monitoring
+    - List of machines
+    - Machine status and details of dispensers.(for now mocked using a dummy websocket echo api and random number.)
+- Dispenser Management
+    - Add and delete dispensers to machines.
+    - incrementing or decrementing item quantity in the dispenser.
+- Recipe Management
+    - List and manage recipes of each machine(creating and deleting.)
+- Modularity
+    - To enhance usability and streamline development, React has been employed as the primary framework, complemented by Tailwind CSS for efficient and rapid styling.
+    - useState is utilized for managing local state in components, providing a simple and effective way to handle individual component data.
+    - For global state management, Zustand has been integrated, offering a lightweight and flexible solution for state sharing across the application.
+    - Components from daisy ui have been used to have a uniform design language.
+    - Code reusability has been done by creating custom react components.
+
+### Tech Stack
+- [React.js](https://react.dev/)
+- [JavaScript](https://javascript.info/)
+- [TailwindCSS](https://tailwindcss.com/)
+- [daisyUI](https://daisyui.com/)
+- [zustand](https://zustand-demo.pmnd.rs/)
+- [Vite](https://vite.dev/)
+### Contact
+Shrinibas Mahanta -> [shrinibasmahanta2004@gmail.com](shrinibasmahanta2004@gmail.com)
+
+
