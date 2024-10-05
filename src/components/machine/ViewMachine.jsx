@@ -3,15 +3,15 @@ import { useState } from "react";
 import CreateModal from "../common/CreateModal";
 import DeleteModal from "../common/DeleteModal";
 
-function ViewMachine({ isOpen, machine, dispensers, closeModal }) {
+function ViewMachine({ isOpen, machine, dispensers, closeModal, machineId }) {
     const incrementDisps = useDispenserStore((state) => state.incrementDispenser);
     const decrementDisps = useDispenserStore((state) => state.decrementDispenser);
 
     const [isAddModalOpen, setAddModal] = useState(false);
-    const [isDeleteModalOpen, setDeleteModal] = useState(false);
+    const [isDeleteModalOpen, setDeleteModal] = useState(-1);
 
     const getRecipesByMachineId = useRecipeStore((state) => state.getRecipesByMachineId);
-    const recipes = getRecipesByMachineId(machine.machineId);
+    const recipes = getRecipesByMachineId(machineId);
 
     return (
         <div>
@@ -20,7 +20,6 @@ function ViewMachine({ isOpen, machine, dispensers, closeModal }) {
                     <div className="modal-box">
                         <div className="card-title font-sans">{machine.machineName}</div>
 
-                        {/* Recipe Section */}
                         <div className="gap-1 flex-col h-60 bg-slate-800 rounded-md p-2 mb-5">
                             <div className="flex justify-between">
                                 <span className="font-extrabold text-slate-400">Recipes</span>
@@ -30,8 +29,8 @@ function ViewMachine({ isOpen, machine, dispensers, closeModal }) {
                                 <CreateModal
                                     isOpen={isAddModalOpen}
                                     closeModal={() => setAddModal(false)}
-                                    machine={machine}
                                     modalType={'Recipe'}
+                                    machineId={machineId}
                                 />
                             )}
 
@@ -41,14 +40,14 @@ function ViewMachine({ isOpen, machine, dispensers, closeModal }) {
                                         <p className="font-mono font-bold">{resp.recipeName}</p>
                                         <div className="flex justify-center items-center gap-2">
                                             <p className="bg-slate-700 rounded-md p-1.5">{resp.recipeDetails}</p>
-                                            <button className="btn btn-sm btn-primary" onClick={() => setDeleteModal(true)}>Delete</button>
+                                            <button className="btn btn-sm btn-primary" onClick={() => setDeleteModal(index)}>Delete</button>  {/* Pass the index here */}
                                         </div>
-                                        {isDeleteModalOpen && (
+                                        {isDeleteModalOpen === index && (
                                             <DeleteModal
-                                                isOpen={isDeleteModalOpen}
-                                                machine={machine}
+                                                isOpen={isDeleteModalOpen === index}
+                                                machineId={machineId}
                                                 modalType={'Recipe'}
-                                                modalClose={() => setDeleteModal(false)}
+                                                modalClose={() => setDeleteModal(-1)}
                                                 index={index}
                                             />
                                         )}
@@ -57,9 +56,8 @@ function ViewMachine({ isOpen, machine, dispensers, closeModal }) {
                             </div>
                         </div>
 
-                        {/* Ingredient Section */}
                         <div className="gap-1 flex-col h-60 bg-slate-800 rounded-md p-2">
-                            <span className="font-extrabold text-slate-400">Ingredients</span>
+                            <span className="font-extrabold text-slate-400">Dispensers</span>
                             <div className="overflow-y-auto overscroll-y-auto max-h-52">
                                 {dispensers.map((disp, index) => (
                                     <div key={index}>

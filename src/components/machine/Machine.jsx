@@ -24,7 +24,7 @@ function Machine({ machine, machineId }) {
                 </svg>
 
                 <div className="gap-1 flex-col h-60 bg-slate-800 rounded-md p-2">
-                    <span className="font-extrabold text-slate-400">Ingredients</span>
+                    <span className="font-extrabold text-slate-400">Dispensers</span>
                     <div className="overflow-y-auto overscroll-y-auto max-h-52">
                         {filteredDisps.map((disp, index) => (
                             <div key={index}>
@@ -44,6 +44,7 @@ function Machine({ machine, machineId }) {
                         <ViewMachine
                             isOpen={isMachineOpen}
                             machine={machine}
+                            machineId={machineId}
                             dispensers={filteredDisps}
                             closeModal={() => { setMachine(false) }}
                         />

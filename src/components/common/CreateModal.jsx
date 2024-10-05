@@ -109,7 +109,7 @@ const CustomModal = ({ modalType, inputData, handleChange, handleSubmit, closeMo
     }
 };
 
-function CreateModal({ machine, modalType, isOpen, closeModal }) {
+function CreateModal({ modalType, isOpen, closeModal, machineId }) {
     const addMachine = useMachineStore((state) => state.addMachine)
 
     const addRecipe = useRecipeStore((state) => state.addRecipe)
@@ -130,7 +130,7 @@ function CreateModal({ machine, modalType, isOpen, closeModal }) {
         e.preventDefault();
         switch (formtype) {
             case 'recipes':
-                addRecipe(machine.machineId, inputData)
+                addRecipe(machineId, inputData)
                 break;
             case 'machines':
                 addMachine(inputData)
@@ -139,6 +139,8 @@ function CreateModal({ machine, modalType, isOpen, closeModal }) {
                 addDispenser(inputData)
                 break;
         }
+
+        closeModal()
     };
 
     return (
