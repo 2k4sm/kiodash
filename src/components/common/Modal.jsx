@@ -63,10 +63,10 @@ const Modal = (({ title, fields, onSubmit, onCancel }) => {
                 ))}
 
                 <div className="modal-action flex justify-between items-center">
-                    <button type="submit" className="btn btn-primary">
+                    <button type="submit" className="btn btn-primary btn-md">
                         Submit
                     </button>
-                    <button type="button" className="btn" onClick={onCancel}>
+                    <button type="button" className="btn btn-secondary" onClick={onCancel}>
                         Close
                     </button>
                 </div>

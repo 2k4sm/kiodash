@@ -29,7 +29,7 @@ const CustomModal = ({ modalType, machineId, recInd, modalClose }) => {
             return (
                 <div className="flex flex-col justify-center items-center gap-2 ">
                     {dispensers.map((dispenser, index) => (
-                        <div onClick={() => deleteDispenser(index)} className="bg-slate-500 w-[80%] rounded-md text-center p-3" key={index}>{dispenser.dispenserId} - {dispenser.machineId}</div>
+                        <div onClick={() => deleteDispenser(index)} className="bg-slate-500 w-[80%] rounded-md text-center p-3" key={index}>{dispenser.machineId} - {dispenser.dispenserId}</div>
                     ))}
                 </div>
             );
@@ -47,18 +47,18 @@ const CustomModal = ({ modalType, machineId, recInd, modalClose }) => {
 };
 
 
-function DeleteModel({ isOpen, modalType, modalClose, machineId, index }) {
+function DeleteModel({ isOpen, modalType, modalClose, machineId, index, machine }) {
 
     return (
         <div>
             {isOpen && (
                 <dialog open className="modal modal-bottom sm:modal-middle bg-slate-200">
                     <div className="modal-box flex flex-col items-center">
-                        <div className="w-[100%]">
+                        <div className="w-[99%] break-words">
                             <CustomModal modalType={modalType} machineId={machineId} recInd={index} modalClose={modalClose}> </CustomModal>
                         </div>
                         <div className="modal-action flex justify-between items-center">
-                            <button type="button" className="btn" onClick={modalClose}>
+                            <button type="button" className="btn btn-secondary" onClick={modalClose}>
                                 Close
                             </button>
                         </div>

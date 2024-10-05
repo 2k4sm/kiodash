@@ -23,12 +23,12 @@ function Machine({ machine, machineId }) {
                     <line x1="10" y1="16" x2="10.01" y2="16"></line>
                 </svg>
 
-                <div className="gap-1 flex-col h-60 bg-slate-800 rounded-md p-2">
+                <div className="gap-1 flex-col h-60">
                     <span className="font-extrabold text-slate-400">Dispensers</span>
                     <div className="overflow-y-auto overscroll-y-auto max-h-52">
                         {filteredDisps.map((disp, index) => (
-                            <div key={index}>
-                                <p className="font-mono font-bold">{disp.ingredientName}</p>
+                            <div key={index} className="bg-sky-900 m-2 p-1 rounded-md">
+                                <p className="font-mono font-bold break-words w-[99%]">{disp.ingredientName}</p>
                                 <progress className={`progress ${disp.quantity > 350 ? 'progress-success' : 'progress-error'} w-full`} value={disp.quantity} max="1000"></progress>
                             </div>
                         ))}
